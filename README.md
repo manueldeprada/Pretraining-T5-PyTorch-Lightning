@@ -1,4 +1,4 @@
-# Pretraining T5 using Pytorch Lightning
+# Pretraining T5 using PyTorch Lightning
 ## Introduction
 This repo reimplements the original T5 denoising pretrain objective, which to the best of my knowledge, is not avaliable outside the TF-Mesh environment. 
 
