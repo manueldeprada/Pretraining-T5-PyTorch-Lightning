@@ -16,10 +16,10 @@ and calculate the targets:
 
 This allows T5 to learn from the given corpus. In this repo, the CORD-19 dataset is used to pretrain T5 so it performs better in downstream tasks. Although this script may have some training defects compared to Google's original code, it is small, flexible, portable and written with PyTorch. In our experiments with COVID-19 related downstream tasks, this pretraining greatly improved performance.
 
-##Pretrained version
+## Pretrained version
 A pretrained version of T5 on the CORD-19 dataset is available in HuggingFace: [https://huggingface.co/manueldeprada/t5-cord19](https://huggingface.co/manueldeprada/t5-cord19) 
 
-##Files in this repo
+## Files in this repo
 The files are intended to be used in the same order.
 - The **extract_cord19.py** file takes the original CORD-19 dataset, as downloaded from the official site, and extracts a json file consisting of title, abstract and text from readable papers.
 - **standarize_cord19** takes the previous json file and makes a big pretraining text file that has just a sentence per line.
@@ -47,7 +47,7 @@ The files are intended to be used in the same order.
 - **Cord19Dataset.py** implements a torch Dataset using the underlying structure from the previous phase, lazy loading the joblib files as needed.
 - **pretrain.py** and **t2t/__init__.py**. Previous files were written from scratch, but this two files are modified from  from the excelent [ceshine/finetuning-t5/paraphrase](https://github.com/ceshine/finetuning-t5/tree/master/paraphrase) repo. A huge thanks to him for open-sourcing such well-written scripts!
 
-##TO-DOs
+## TO-DOs
 
 - It may be worth studying if the masking phase would be done better before tokenization. By doing in the current way, it could lead to strange input-targets like this one:
   ```
