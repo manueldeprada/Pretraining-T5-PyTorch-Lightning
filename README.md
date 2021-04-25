@@ -24,7 +24,7 @@ The files are intended to be used in the same order.
 - The **extract_cord19.py** file takes the original CORD-19 dataset, as downloaded from the official site, and extracts a json file consisting of title, abstract and text from readable papers.
 - **standarize_cord19** takes the previous json file and makes a big pretraining text file that has just a sentence per line.
 - **prepare_dataset.py** is where all the magic happens. This file takes any dataset file(s) with a sentence per line and efficiently, taking chunks of the file(s):
-    1. Tokenizes the sentence using T5's SentencePiece tokenizer. This is, splits words and necessary and assigns an integer to every word.
+    1. Tokenizes the sentence using T5's SentencePiece tokenizer. This is, splits words as necessary and assigns an integer to every word.
     2. Checks that sentences are not too long. For example, T5-base has a sequence length of 512 tokens. If a sentence is too long, the script will search for a dot and split it before discarding it, since it is very probable that such a long sentence was not well tokenized upstream. Also discard any sentence very short or with a lot of unknown tokens inside.
     4. Generate input and target ids as shown in the introduction, masking tokens with a given probability.
     5. Save the (input, target) pairs in 100mb joblib files that can be loaded efficiently for training, with a meta.json file containing lengths, train-valid partitioning and other meta info.
