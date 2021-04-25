@@ -14,7 +14,7 @@ and calculate the targets:
 
 `<extra_id_0> cute dog <extra_id_1> the <extra_id_2>`
 
-This allows T5 to learn from the corpus. In this repo, the CORD-19 dataset is used to pretrain T5 so it performs better in downstream tasks. Although this is script may have some training defects compared to the Google's original, it is small, flexible, portable and written with PyTorch. In our experiments with COVID-19 related downstream tasks, this pretraining greatly improved performance.
+This allows T5 to learn from the given corpus. In this repo, the CORD-19 dataset is used to pretrain T5 so it performs better in downstream tasks. Although this script may have some training defects compared to Google's original code, it is small, flexible, portable and written with PyTorch. In our experiments with COVID-19 related downstream tasks, this pretraining greatly improved performance.
 
 ##Pretrained version
 A pretrained version of T5 on the CORD-19 dataset is available in HuggingFace: [https://huggingface.co/manueldeprada/t5-cord19](https://huggingface.co/manueldeprada/t5-cord19) 
