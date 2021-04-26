@@ -1,4 +1,9 @@
 # Pretraining T5 using PyTorch Lightning
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/6536835/116129345-4b306700-a6ca-11eb-9acd-a14aa2b8d115.png" width="49%" />
+  <img src="https://miro.medium.com/max/3576/1*JANKKXdopykNVg66IFHVVg.png" width="49%" /> 
+</p>
+
 ## Introduction
 This repo reimplements the original T5 denoising pretrain objective, which to the best of my knowledge, is not avaliable outside the TF-Mesh environment. 
 
@@ -28,7 +33,7 @@ A pretrained version of T5 on the CORD-19 dataset is available in HuggingFace: [
     ```
 4. Previous step creates the *dataset_cache* folder with the dataset prepared for training. To start training, run
     ```
-    python3 pretrain.py --epochs 2 --dataset cord19 --batch-size 8 --grad-accu 2 --max-len 64 --num-gpus=2
+    python3 pretrain.py --epochs 2 --dataset cord19 --batch-size 8 --grad-accu 2 --max-len 64 --num-gpus=1
     ```
 
 ## Files in this repo
