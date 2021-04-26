@@ -21,6 +21,9 @@ class Cord19Dataset(Dataset):
         with open(DATASET_DIR / Path("dataset_meta.json"), 'r') as json_file:
             self.meta = json.load(json_file)
         self.files_loaded = {}
+        for file in self.meta[self.part]:
+            print(f"Loading dataset file {file}...")
+            self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
 
     def __len__(self):
         return self.meta[f"{self.part}_size"]
