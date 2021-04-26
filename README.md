@@ -50,11 +50,12 @@ The files are intended to be used in the same order.
   Dataset (a file with a sentence in each line) into a set of tokenized
   files for training and validating the text2text model.
 
-  Arguments:
-    [TOKENIZER_NAME]    T5 tokenizer used for token ids.  [default: t5-base]
-    [VALID_SIZE]        Validation set size.  [default: 0.2]
-    [DUMPS_SIZE]        Size in MB for the dataset raw files.  [default: 100]
-    [MASK_PROBABILITY]  Probability of masking a token in a sentence.  [default: 0.15]
+  Options:
+  --tokenizer-name TEXT           T5 tokenizer used for token ids.  [default: t5-base]
+  --valid-size FLOAT              Validation set size.  [default: 0.2]
+  --dumps-size INTEGER            Size in MB for the dataset raw files.  [default: 100]
+  --mask-probability FLOAT        Probability of masking a token in a
+                                  sentence.  [default: 0.15]
   ```
 - **Cord19Dataset.py** implements a torch Dataset using the underlying structure from the previous phase, lazy loading the joblib files as needed.
 - **pretrain.py** and **t2t/__init__.py**. Previous files were written from scratch, but this two files are modified from  from the excelent [ceshine/finetuning-t5/paraphrase](https://github.com/ceshine/finetuning-t5/tree/master/paraphrase) repo. A huge thanks to him for open-sourcing such well-written scripts!
