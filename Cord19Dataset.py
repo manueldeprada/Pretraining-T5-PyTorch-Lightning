@@ -28,6 +28,7 @@ class Cord19Dataset(Dataset):
     def __getitem__(self, index):
         file, true_index = self.get_file_from_index(index)
         if file not in self.files_loaded:
+            print(f"Loading dataset file {file}...")
             self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
         return (
             torch.tensor(self.files_loaded[file].input_ids[index], dtype=torch.int64),
