@@ -4,6 +4,7 @@ from pathlib import Path
 import joblib
 import torch
 from torch.utils.data import Dataset
+from tqdm import tqdm
 
 DATASET_DIR = Path("dataset_cache/")
 DATASET_DIR.mkdir(exist_ok=True, parents=True)
@@ -16,13 +17,13 @@ class Parts(enum.Enum):
 
 class Cord19Dataset(Dataset):
     def __init__(self, part: Parts):
-        print("loading " + f'cord19-{part}')
         self.part = part.value
+        print("loading " + f'cord19-{self.part}')
         with open(DATASET_DIR / Path("dataset_meta.json"), 'r') as json_file:
             self.meta = json.load(json_file)
         self.files_loaded = {}
-        for file in self.meta[self.part]:
-            print(f"Loading dataset file {file}...")
+        print(f"Loading {self.part} dataset into memory...")
+        for file in tqdm(self.meta[self.part]):
             self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
 
     def __len__(self):
@@ -30,9 +31,9 @@ class Cord19Dataset(Dataset):
 
     def __getitem__(self, index):
         file, true_index = self.get_file_from_index(index)
-        if file not in self.files_loaded:
-            print(f"Loading dataset file {file}...")
-            self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
+        # if file not in self.files_loaded:
+        #     print(f"Loading dataset file {file}...")
+        #     self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
         return (
             torch.tensor(self.files_loaded[file][0][true_index], dtype=torch.int64),  # inputs in files_loaded[file][0]
             torch.tensor(self.files_loaded[file][1][true_index], dtype=torch.int64)  # targets in files_loaded[file][1]
