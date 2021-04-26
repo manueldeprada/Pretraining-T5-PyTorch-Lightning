@@ -28,7 +28,7 @@ A pretrained version of T5 on the CORD-19 dataset is available in HuggingFace: [
     ```
 4. Previous step creates the *dataset_cache* folder with the dataset prepared for training. To start training, run
     ```
-    python3 pretrain.py --epochs 5 --dataset cord19 --batch-size 8 --grad-accu 2 --max-len 64 --num-gpus=2
+    python3 pretrain.py --epochs 2 --dataset cord19 --batch-size 8 --grad-accu 2 --max-len 64 --num-gpus=2
     ```
 
 ## Files in this repo

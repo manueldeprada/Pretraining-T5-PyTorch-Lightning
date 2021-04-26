@@ -31,13 +31,13 @@ class Cord19Dataset(Dataset):
             print(f"Loading dataset file {file}...")
             self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
         return (
-            torch.tensor(self.files_loaded[file].input_ids[index], dtype=torch.int64),
-            torch.tensor(self.files_loaded[file].target_ids[index], dtype=torch.int64)
+            torch.tensor(self.files_loaded[file][0][true_index], dtype=torch.int64),  # inputs in files_loaded[file][0]
+            torch.tensor(self.files_loaded[file][1][true_index], dtype=torch.int64)  # targets in files_loaded[file][1]
         )
 
     def get_file_from_index(self, index):
         count = 0
         for file in self.meta[self.part]:
             count += self.meta[file]
-            if count > index:
+            if count >= index:
                 return file, count - index
