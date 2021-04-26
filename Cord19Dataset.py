@@ -39,5 +39,6 @@ class Cord19Dataset(Dataset):
         count = 0
         for file in self.meta[self.part]:
             count += self.meta[file]
-            if count >= index:
-                return file, count - index
+            if index < count:
+                return file, index - count + self.meta[file]
+
