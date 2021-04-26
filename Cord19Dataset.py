@@ -18,12 +18,11 @@ class Parts(enum.Enum):
 class Cord19Dataset(Dataset):
     def __init__(self, part: Parts):
         self.part = part.value
-        print("loading " + f'cord19-{self.part}')
+        print(f"Loading {self.part} dataset into memory...")
         with open(DATASET_DIR / Path("dataset_meta.json"), 'r') as json_file:
             self.meta = json.load(json_file)
         self.files_loaded = {}
-        print(f"Loading {self.part} dataset into memory...")
-        for file in tqdm(self.meta[self.part]):
+        for file in tqdm(self.meta[self.part], ncols=100):
             self.files_loaded[file] = joblib.load(DATASET_DIR / Path(file))
 
     def __len__(self):
