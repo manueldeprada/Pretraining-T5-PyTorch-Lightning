@@ -19,6 +19,18 @@ This allows T5 to learn from the corpus. In this repo, the CORD-19 dataset is us
 ##Pretrained version
 A pretrained version of T5 on the CORD-19 dataset is available in HuggingFace: [https://huggingface.co/manueldeprada/t5-cord19](https://huggingface.co/manueldeprada/t5-cord19) 
 
+## Instructions
+1. Prepare your dataset. In the case of CORD-19, download the latest version and run **extract_cord19.py**.
+2. Take the json file generated, and run **standarize_cord19.json**
+3. Place the standarized file in this repo's main folder and run:
+    ```
+    python3 prepare_dataset.py --tokenizer-name t5-base --valid-size 0.2 --dumps-size 100 --mask-probability 0.15
+    ```
+4. Previous step creates the *dataset_cache* folder with the dataset prepared for training. To start training, run
+    ```
+    python3 pretrain.py --epochs 5 --dataset cord19 --batch-size 8 --grad-accu 2 --max-len 64 --num-gpus=2
+    ```
+
 ##Files in this repo
 The files are intended to be used in the same order.
 - The **extract_cord19.py** file takes the original CORD-19 dataset, as downloaded from the official site, and extracts a json file consisting of title, abstract and text from readable papers.
@@ -49,7 +61,7 @@ The files are intended to be used in the same order.
 
 ##TO-DOs
 
-- It may be worth studying if the masking phase would be done better before tokenization. By doing in the current way, it could lead to strange input-targets like this one:
+- It may be worth studying if the masking phase would be better done before tokenization. In the current implementation, it can lead to strange input-targets like this one:
   ```
   >>> tokenizer.tokenize("are grouped")
   ['▁are', '▁', 'grouped']
@@ -57,4 +69,4 @@ The files are intended to be used in the same order.
   input_ids=['▁are', '<extra_id_0>', 'grouped']
   target_ids=['<extra_id_0>', '▁', '<extra_id_1>']
   ```
-- When loading the dataset for training, we are loading the chuck files as needed. It may be worth exploring the sequentialness  of the SortishSampler for more efficient loading and also freeing loaded chunks that are not longer needed.
+- When loading the dataset for training, we are loading the chunk files as needed. It may be worth exploring the sequentialness of the SortishSampler for more efficient loading and also freeing loaded chunks that are not longer needed.

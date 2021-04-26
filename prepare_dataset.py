@@ -106,10 +106,10 @@ def write_disk(input_ids, target_ids, file_counter):
     # print("\rFile written: " + str(CACHE_PATH / (Path("dataset_" + str(file_counter)).stem + ".jbl")))
 
 
-def main(tokenizer_name: str = typer.Argument("t5-base", help="T5 tokenizer used for token ids."),
-         valid_size: float = typer.Argument(0.2, help="Validation set size."),
-         dumps_size: int = typer.Argument(100, help="Size in MB for the dataset raw files."),
-         mask_probability: float = typer.Argument(0.15, help="Probability of masking a token in a sentence.")):
+def main(tokenizer_name: str = typer.Option("t5-base", help="T5 tokenizer used for token ids."),
+         valid_size: float = typer.Option(0.2, help="Validation set size."),
+         dumps_size: int = typer.Option(100, help="Size in MB for the dataset raw files."),
+         mask_probability: float = typer.Option(0.15, help="Probability of masking a token in a sentence.")):
     """This script preprocesses and tokenizes a standardized pretraining text Dataset (a file with a sentence in each
     line) into a set of tokenized files for training and validating the text2text model."""
     tokenizer = T5Tokenizer.from_pretrained(tokenizer_name)

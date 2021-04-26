@@ -10,15 +10,15 @@ DATASET_DIR.mkdir(exist_ok=True, parents=True)
 
 
 class Parts(enum.Enum):
-    TRAIN = "train",
+    TRAIN = "train"
     VALID = "valid"
 
 
 class Cord19Dataset(Dataset):
     def __init__(self, part: Parts):
         print("loading " + f'cord19-{part}')
-        self.part = str(part)
-        with open(DATASET_DIR / Path("dataset_meta.json"), 'w') as json_file:
+        self.part = part.value
+        with open(DATASET_DIR / Path("dataset_meta.json"), 'r') as json_file:
             self.meta = json.load(json_file)
         self.files_loaded = {}
 
