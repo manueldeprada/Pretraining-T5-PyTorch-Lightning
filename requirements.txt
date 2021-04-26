@@ -1,0 +1,9 @@
+joblib
+typer
+tqdm
+transformers
+sentencepiece
+torch
+pytorch_lightning
+pytorch_lightning_spells
+nltk
